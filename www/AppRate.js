@@ -144,6 +144,10 @@ var AppRate = (function() {
         || (IS_ANDROID && AppRate.preferences.reviewType.android === 'InAppReview')) {
           updateCounter('stop');
           AppRate.navigateToAppStore();
+        } else if(AppRate.preferences.simpleMode) {
+          navigator.notification.confirm(localeObj.message, promptForStoreRatingWindowButtonClickHandler, localeObj.title, [localeObj.cancelButtonLabel, localeObj.laterButtonLabel, localeObj.rateButtonLabel]);
+        } else {
+          navigator.notification.confirm(localeObj.appRatePromptMessage, promptForAppRatingWindowButtonClickHandler, localeObj.appRatePromptTitle, [localeObj.noButtonLabel, localeObj.yesButtonLabel]);
         }
       } else if(AppRate.preferences.simpleMode) {
         navigator.notification.confirm(localeObj.message, promptForStoreRatingWindowButtonClickHandler, localeObj.title, [localeObj.cancelButtonLabel, localeObj.laterButtonLabel, localeObj.rateButtonLabel]);
